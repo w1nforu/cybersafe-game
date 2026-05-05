@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe Game: Киберқауіпсіздік тесті</title>
+    <style>
+        :root {
+            --bg-color: #e5ddd5;
+            --chat-header: #005c4b;
+            --chat-bg: #e5ddd5;
+            --bot-msg: #ffffff;
+            --user-msg: #d9fdd3;
+            --ai-msg: #fff3c4;
+            --correct-color: #25d366;
+            --wrong-color: #f15c6d;
+            --text-main: #111b21;
+            --text-muted: #667781;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 480px;
+            height: 95vh;
+            background: var(--chat-bg);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .chat-header {
+            padding: 15px 20px;
+            background: var(--chat-header);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reset-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .header-info h2 { font-size: 16px; font-weight: 600; }
+        .header-info span { font-size: 12px; color: #d1d1d1; }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #chat-window {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d0c9c3" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.4;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .received { align-self: flex-start; background: var(--bot-msg); border-top-left-radius: 0; }
+        .sent { align-self: flex-end; background: var(--user-msg); border-top-right-radius: 0; }
+        .ai-message { align-self: center; background: var(--ai-msg); border-radius: 12px; border-left: 4px solid #fbc02d; font-size: 14px; }
+
+        .status-msg { text-align: center; font-size: 14px; font-weight: bold; }
+        .status-correct { color: var(--correct-color); }
+        .status-wrong { color: var(--wrong-color); }
+
+        .controls-container { background: white; padding: 15px; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 10px; }
+        .btn { padding: 12px; border: none; border-radius: 8px; background: #f0f2f5; cursor: pointer; text-align: left; font-size: 15px; }
+        .btn:hover { background: #00d3ad; }
+        .btn-action { background: #005c4b; color: white; text-align: center; font-weight: bold; }
+
+        .hidden { display: none !important; }
+
+        #final-screen {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: white; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 30px; text-align: center; z-index: 20;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="chat-header">
+            <div class="header-left">
+                <button class="reset-btn" onclick="resetGame()">🔄 Қайтадан бастау</button>
+                <div class="header-info">
+                    <h2>📱 Белгісіз нөмір</h2>
+                    <span id="question-counter">Сұрақ: 1 / 20</span>
+                </div>
+            </div>
+            <div class="score-badge">Ұпай: <span id="score-display">0</span></div>
+        </div>
+
+        <div id="chat-window"></div>
+
+        <div class="controls-container" id="options-panel">
+            <button class="btn" id="btn-0" onclick="checkAnswer(0)"></button>
+            <button class="btn" id="btn-1" onclick="checkAnswer(1)"></button>
+            <button class="btn" id="btn-2" onclick="checkAnswer(2)"></button>
+        </div>
+
+        <div class="controls-container hidden" id="next-panel">
+            <button class="btn btn-action" onclick="nextQuestion()">Келесі хабарлама ➡️</button>
+        </div>
+
+        <div id="final-screen" class="hidden">
+            <h2>Ойын аяқталды!</h2>
+            <div style="font-size: 48px; font-weight: bold; color: #005c4b; margin: 20px 0;" id="final-score-text">0 / 100</div>
+            <p id="level-text" style="font-weight: bold; margin-bottom: 20px;"></p>
+            <button class="btn btn-action" onclick="resetGame()">🔄 Қайтадан бастау</button>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = [
+            { q: "Сіз жаңа iPhone ұтып алдыңыз! Сілтемеге өтіңіз: http://fake-prize.com", options: ["A) Сілтемеге өту", "B) Хабарламаны елемеу", "C) Жіберушіні тексеру"], correctIndex: 2, explanation: "Күдікті сілтемелер - бұл фишинг. Әрқашан жіберушіні тексеру маңызды." },
+            { q: '"Досың": Маған SMS кодты жіберші', options: ["A) Кодты жіберу", "B) Қоңырау шалу", "C) Елемеу"], correctIndex: 1, explanation: "Хакерлер достарыңыздың аккаунтын бұзып алуы мүмкін. Қоңырау шалып, нақтылаңыз." },
+            { q: '"Жеңіл ақша табу: картаңды бер"', options: ["A) Келісу", "B) Бас тарту", "C) Толығырақ сұрау"], correctIndex: 1, explanation: "Бұл ақшаны жылыстату немесе алаяқтық. Ешқашан картаңызды бермеңіз." },
+            { q: 'Банк: "Аккаунтыңыз бұғатталды, кіріңіз" (жалған сайт)', options: ["A) Кіру", "B) URL тексеру", "C) Елемеу"], correctIndex: 1, explanation: "Банктер ешқашан сілтеме арқылы кіруді сұрамайды. URL-ды міндетті түрде тексеріңіз." },
+            { q: "Белгісіз адам файл жіберді (.exe)", options: ["A) Ашып көру", "B) Жүктеу", "C) Ашпау"], correctIndex: 2, explanation: "Белгісіз .exe файлдары көбінесе вирус немесе троян болады." },
+            { q: 'Instagram: "Сіздің аккаунтыңыз тексеріледі"', options: ["A) Логин енгізу", "B) Сілтемені басу", "C) Ресми сайттан тексеру"], correctIndex: 2, explanation: "Бұл логин мен парольді ұрлау әдісі. Тек ресми қосымшадан не сайттан тексеріңіз." },
+            { q: "Wi-Fi тегін (парольсіз)", options: ["A) Қосылу", "B) VPN қолдану", "C) Маңызды деректер енгізбеу"], correctIndex: 2, explanation: "Ашық Wi-Fi желілерінде деректерді ұстап қалу оңай. Құпия ақпаратты енгізбеңіз." },
+            { q: 'Ойын: "Чит код жүкте"', options: ["A) Жүктеу", "B) Бас тарту", "C) Досқа жіберу"], correctIndex: 1, explanation: "Чит-кодтардың ішіне жиі зиянды бағдарламалар (вирустар) жасырылады." },
+            { q: 'Email: "Сізге мұра қалдырылды"', options: ["A) Жауап беру", "B) Елемеу", "C) Ақпарат беру"], correctIndex: 1, explanation: "Бұл классикалық алаяқтық хат. Елемеу — ең дұрыс шешім." },
+            { q: 'Telegram: "Жұмыс ұсынысы, карта керек"', options: ["A) Келісу", "B) Бас тарту", "C) Құжат жіберу"], correctIndex: 1, explanation: "Адал жұмыс берушілер жұмысқа қабылдау үшін сізден карта нөмірін сұрамайды." },
+            { q: "Сайтта қате домен (g00gle.com)", options: ["A) Кіру", "B) Доменді тексеру", "C) Пароль енгізу"], correctIndex: 1, explanation: "Бір әріптің өзгеруі (o орнына 0) — бұл жалған (фишингтік) сайттың белгісі." },
+            { q: "Досыңыздан күмәнді сілтеме", options: ["A) Ашып көру", "B) Досқа жазу", "C) Елемеу"], correctIndex: 1, explanation: "Досыңыздың аккаунты бұзылған болуы мүмкін. Басқа жолмен хабарласып сұраңыз." },
+            { q: "Сізден жеке фото сұрайды", options: ["A) Жіберу", "B) Бас тарту", "C) Күлу"], correctIndex: 1, explanation: "Жеке фотосуреттерді бопсалау (шантаж) үшін қолдануы мүмкін. Жібермеңіз." },
+            { q: 'Антивирус: "Сізде вирус бар" (жалған)', options: ["A) Орнату", "B) Елемеу", "C) Ресми бағдарламаны тексеру"], correctIndex: 2, explanation: "Бұл сізді қорқытып, жалған бағдарламаны орнатуға мәжбүрлейтін хабарлама." },
+            { q: "Банк картасын суретке түсіріп жіберу сұралды", options: ["A) Жіберу", "B) Бас тарту", "C) Ойлану"], correctIndex: 1, explanation: "Картаның суреті арқылы алаяқтар сіздің шотыңыздан барлық ақшаны шешіп алады." },
+            { q: "QR кодты сканерлеу сұралады", options: ["A) Сканерлеу", "B) Тексеру", "C) Досқа жіберу"], correctIndex: 1, explanation: "QR-кодтар зиянды сілтемелерге апаруы мүмкін. Қайда апаратынын тексеріңіз." },
+            { q: "Ойын аккаунтын сатып алу", options: ["A) Сатып алу", "B) Бас тарту", "C) Ақша жіберу"], correctIndex: 1, explanation: "Аккаунт сатып алу ережеге қайшы және көбінесе алаяқтықпен аяқталады." },
+            { q: "Email қосымша файл (.zip)", options: ["A) Ашып көру", "B) Жүктеу", "C) Ашпау"], correctIndex: 2, explanation: ".zip архивтерінің ішінде жасырын вирустар болуы мүмкін. Белгісіз файлдарды ашпаңыз." },
+            { q: '"Сыйлық алу үшін деректер енгіз"', options: ["A) Енгізу", "B) Елемеу", "C) Тексеру"], correctIndex: 2, explanation: "Сыйлық үшін жеке деректерді сұрау - ақпарат жинаудың ескі тәсілі." },
+            { q: "Бейтаныс адам ақша сұрайды", options: ["A) Жіберу", "B) Бас тарту", "C) Ойлану"], correctIndex: 1, explanation: "Бейтаныс адамдарға ешқашан ақша аудармаңыз, бұл 100% алаяқтық." }
+        ];
+
+        let currentIndex = 0;
+        let currentScore = 0;
+        const POINTS = 5;
+
+        const chatWindow = document.getElementById('chat-window');
+        const scoreDisplay = document.getElementById('score-display');
+        const counterDisplay = document.getElementById('question-counter');
+        const optionsPanel = document.getElementById('options-panel');
+        const nextPanel = document.getElementById('next-panel');
+
+        function appendMessage(text, type) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${type}`;
+            msgDiv.innerHTML = text;
+            chatWindow.appendChild(msgDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        function loadQuestion() {
+            chatWindow.innerHTML = ''; // ОЧИСТКА ЭКРАНА для нового вопроса
+            const data = questionsData[currentIndex];
+            counterDisplay.innerText = `Сұрақ: ${currentIndex + 1} / ${questionsData.length}`;
+            
+            appendMessage(data.q, 'received');
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`btn-${i}`).innerText = data.options[i];
+            }
+            optionsPanel.classList.remove('hidden');
+            nextPanel.classList.add('hidden');
+        }
+
+        window.checkAnswer = function(idx) {
+            const data = questionsData[currentIndex];
+            optionsPanel.classList.add('hidden');
+            appendMessage(data.options[idx], 'sent');
+
+            const isCorrect = (idx === data.correctIndex);
+            if (isCorrect) {
+                currentScore += POINTS;
+                scoreDisplay.innerText = currentScore;
+            }
+
+            setTimeout(() => {
+                const status = document.createElement('div');
+                status.className = `status-msg ${isCorrect ? 'status-correct' : 'status-wrong'}`;
+                status.innerText = isCorrect ? "✅ Дұрыс!" : "❌ Қате!";
+                chatWindow.appendChild(status);
+
+                setTimeout(() => {
+                    appendMessage(`<strong>🤖 Көмекші:</strong><br>${data.explanation}`, 'ai-message');
+                    nextPanel.classList.remove('hidden');
+                }, 600);
+            }, 400);
+        };
+
+        window.nextQuestion = function() {
+            currentIndex++;
+            if (currentIndex < questionsData.length) {
+                loadQuestion();
+            } else {
+                showFinal();
+            }
+        };
+
+        function showFinal() {
+    document.getElementById('final-screen').classList.remove('hidden');
+    // Теперь здесь автоматически будет считаться от 100
+    document.getElementById('final-score-text').innerText = `${currentScore} / 100`; 
+    
+    const lvl = document.getElementById('level-text');
+    
+    if (currentScore >= 90) {
+        lvl.innerText = "Керемет! Сіз кибер-батырсыз! 🛡️ (90-100 балл)";
+        lvl.style.color = "#25d366";
+    } else if (currentScore >= 70) {
+        lvl.innerText = "Жақсы! Сіз өзіңізді қорғай аласыз. ⚠️ (70-85 балл)";
+        lvl.style.color = "#fbc02d";
+    } else {
+        lvl.innerText = "Абайлаңыз! Сізге киберқауіпсіздікті оқу керек. 🚩 (70 баллдан төмен)";
+        lvl.style.color = "#f15c6d";
+    }
+}
+
+        window.resetGame = function() {
+            currentIndex = 0;
+            currentScore = 0;
+            scoreDisplay.innerText = "0";
+            document.getElementById('final-screen').classList.add('hidden');
+            loadQuestion();
+        };
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
