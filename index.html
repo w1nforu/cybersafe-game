@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iSpeak</title>
+    <link rel="shortcut icon" href="images/free-icon-courses-17772312.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="m-header">
+    <div class="m-nav-container">
+        <div class="m-logo">
+            <img src="images/free-icon-courses-17772312.png" alt="iSpeak Logo">
+            <span>iSpeak</span>
+        </div>
+
+        <div class="m-nav-controls">
+            <button class="m-burger-btn" id="m-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<nav class="m-menu-overlay" id="m-menu-overlay">
+    <ul class="m-menu-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html" >О нас</a></li>
+        <li><a href="courses.html">Курсы</a></li>
+        <li><a href="project.html">Проекты</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+        <li><a href="price.html">Цены</a></li>
+        <li class="m-menu-divider"></li>
+        <li><a href="#" class="m-btn-auth">Войти</a></li>
+    </ul>
+</nav>
+
+<section class="m-hero">
+    <div class="m-hero-container">
+        <div class="m-hero-blob"></div>
+
+        <div class="m-hero-content">
+            <div class="m-hero-image">
+                <img src="images/img-peapll.avif" alt="iSpeak Kokshetau">
+            </div>
+
+            <div class="m-hero-info">
+                <span class="m-hero-badge">Первый урок — бесплатно!</span>
+                <h1 class="m-hero-title">Заговори на английском <br><span>за 3 месяца</span></h1>
+                <p class="m-hero-subtitle">Индивидуальные программы обучения. Начни путь к свободному общению уже сегодня.</p>
+                
+                <div class="m-hero-actions">
+                    <a href="https://www.youtube.com/watch?v=_dVF0SXgs0w&list=PLD6SPjEPomavcRd8tXIacGaTyfS51t2V_" class="m-btn-primary" target="_blank">Бесплатный урок</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="promo-section">
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+                <div class="slide-container">
+                    <div class="slide-image">
+                        <img src="images/img3.jpg" alt="Живое общение">
+                    </div>
+                    <div class="slide-text">
+                        <h3>Живое общение.</h3>
+                        <p>80% времени на уроке — это разговорная практика.</p>
+                        <button class="btn" onclick="openMethodModal()">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="slide-container">
+                    <div class="slide-image">
+                        <img src="images/time-management-2.png" alt="Гибкий график">
+                    </div>
+                    <div class="slide-text">
+                        <h3>Гибкий график.</h3>
+                        <p>Учитесь утром, в обед или поздно вечером. Мы полностью подстроимся под ваш ритм жизни.</p>
+                        <a href="contact.html" class="btn">Записаться</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="slide-container">
+                    <div class="slide-image">
+                        <img src="images/teacher.jpg" alt="Опытные наставники">
+                    </div>
+                    <div class="slide-text">
+                        <h3>Опытные наставники.</h3>
+                        <p>Преподаватели с международными сертификатами (CELTA, TEFL).</p>
+                        <a href="project.html" class="btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="slide-container">
+                    <div class="slide-image">
+                        <img src="images/logoti.jpg" alt="Собственная платформа">
+                    </div>
+                    <div class="slide-text">
+                        <h3>Собственная платформа.</h3>
+                        <p>Все материалы, видео и домашние задания в одном личном кабинете.</p>
+                        <a href="https://ielts.gg/" class="btn" target="_blank">Перейти на платформу</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<section class="table-section">
+    <div class="table-container">
+        <h2 class="section-title">Наши программы</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Программа</th>
+                        <th>Уровень</th>
+                        <th>Длительность</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Программа"><strong>English for Kids</strong></td>
+                        <td data-label="Уровень">С нуля</td>
+                        <td data-label="Длительность">6 месяцев</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Программа"><strong>English for Kids</strong></td>
+                        <td data-label="Уровень">Intermediate+</td>
+                        <td data-label="Длительность">4 месяца</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Программа"><strong>IELTS / TOEFL Prep</strong></td>
+                        <td data-label="Уровень">Любой</td>
+                        <td data-label="Длительность">Индивидуально</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="achievements-section">
+    <div class="block">
+    <div class="achievements-container">
+        
+        <div class="achievements-text">
+            <h2>Мы стали лучшей школой английского языка в г. Кокшетау по итогам 2026 года.</h2>
+            <p>Мы благодарны всем, кто изучает английский язык вместе с нами. Наша цель — помочь вам заговорить на английском языке и уверенно использовать его в жизни.</p>
+            <p>Особая дружелюбная атмосфера — то, что отличает нас от других. Мы создаем комьюнити мечтателей и создателей. Здесь вы можете найти друзей по интересам, целям, начать участвовать в жизни компании и во всех мероприятиях для наших учеников и их друзей.</p>
+        </div>
+
+        
+        <div class="achievements-image">
+            <img src="images/сертификат.png" alt="Сертификат лучшей школы 2026">
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="knowledge-base">
+    <div class="block">
+    <div class="kb-container">
+        <div class="kb-header">
+            <h1>База знаний</h1>
+            <p>Выберите свой уровень и начните эффективно учить английский язык.</p>
+        </div>
+
+       
+        <div class="levels-grid">
+            <button class="level-btn" data-level="beginner">Beginner</button>
+            <button class="level-btn" data-level="elementary">Elementary</button>
+            <button class="level-btn" data-level="pre-intermediate">Pre-intermediate</button>
+            <button class="level-btn" data-level="intermediate">Intermediate</button>
+            <button class="level-btn" data-level="intermediate-plus">Intermediate plus</button>
+            <button class="level-btn" data-level="upper-intermediate">Upper-intermediate</button>
+            <button class="level-btn" data-level="advanced">Advanced</button>
+            <button class="level-btn kids-btn" data-level="kids">Kids</button>
+        </div>
+
+        
+        <div class="info-display">
+            <div id="beginner" class="info-content">
+                <h3>Уровень Beginner (A1)</h3>
+                <p>Ваша цель — база. Начните с простых фраз и понимания структуры языка.</p>
+                <ul>
+                    <li>Смотрите мультфильмы (Peppa Pig) с английскими субтитрами.</li>
+                    <li>Изучайте 5-10 самых ходовых глаголов в день.</li>
+                    <li>Используйте карточки Anki для запоминания слов.</li>
+                </ul>
+            </div>
+
+            <div id="elementary" class="info-content">
+                <h3>Уровень Elementary (A2)</h3>
+                <p>Вы уже понимаете простые диалоги. Пора расширять словарный запас.</p>
+                <ul>
+                    <li>Читайте адаптированные книги (Graded Readers) уровня Stage 1.</li>
+                    <li>Слушайте подкасты "6 Minute English" от BBC.</li>
+                    <li>Попробуйте описывать свой день вслух перед зеркалом.</li>
+                </ul>
+            </div>
+
+            <div id="pre-intermediate" class="info-content">
+                <h3>Уровень Pre-intermediate (B1)</h3>
+                <p>Переходный этап. Здесь важно начать "чувствовать" язык.</p>
+                <ul>
+                    <li>Смотрите несложные сериалы (например, "Extra English").</li>
+                    <li>Начните вести личный дневник на английском.</li>
+                    <li>Фокусируйтесь на фразовых глаголах.</li>
+                </ul>
+            </div>
+
+            <div id="intermediate" class="info-content">
+                <h3>Уровень Intermediate (B1+)</h3>
+                <p>Вы уверенно говорите. Пора избавляться от простых слов.</p>
+                <ul>
+                    <li>Заменяйте "good", "bad", "happy" на более сложные синонимы.</li>
+                    <li>Смотрите TED Talks на интересные вам темы.</li>
+                    <li>Переключите интерфейс телефона на английский.</li>
+                </ul>
+            </div>
+
+            <div id="intermediate-plus" class="info-content">
+                <h3>Уровень Intermediate Plus (B2)</h3>
+                <p>Укрепляем знания перед выходом на продвинутый уровень.</p>
+                <ul>
+                    <li>Разбирайте тексты современных песен.</li>
+                    <li>Начните общаться с носителями на платформах вроде Italki или Tandem.</li>
+                    <li>Изучайте идиомы и сленг.</li>
+                </ul>
+            </div>
+
+            <div id="upper-intermediate" class="info-content">
+                <h3>Уровень Upper-intermediate (B2+)</h3>
+                <p>Свобода общения. Вы можете обсуждать почти любые темы.</p>
+                <ul>
+                    <li>Смотрите фильмы и сериалы в оригинале БЕЗ субтитров.</li>
+                    <li>Читайте новости на BBC News или The Guardian.</li>
+                    <li>Пишите небольшие эссе или отзывы на фильмы.</li>
+                </ul>
+            </div>
+
+            <div id="advanced" class="info-content">
+                <h3>Уровень Advanced (C1)</h3>
+                <p>Вы почти как носитель. Ваша цель — нюансы и тонкости.</p>
+                <ul>
+                    <li>Читайте классическую литературу в оригинале.</li>
+                    <li>Изучайте диалекты и специфические акценты.</li>
+                    <li>Попробуйте преподавать базу новичкам — это лучший способ закрепить знания.</li>
+                </ul>
+            </div>
+
+            <div id="kids" class="info-content">
+                <h3>Секция для детей (Kids)</h3>
+                <p>Главное — игра и интерес!</p>
+                <ul>
+                    <li>Игры на английском в группе.</li>
+                    <li>Интерактивные квизы и песенки Super Simple Songs.</li>
+                    <li>Визуальные словари с яркими картинками.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="method-section">
+    <div class="container-text">
+        <div class="block">
+            <div class="text-plate">
+                <h3>Наша методика: Свобода общения вместо сухой теории</h3>
+                <p>Мы верим, что язык — это не набор формул в учебнике, а живой инструмент для жизни. В <b>iSpeak</b> в центре обучения стоите вы.</p>
+            </div>
+        </div>
+
+        <div class="method-steps">
+            
+            <div class="method-item">
+                <div class="method-image">
+                    <img src="images/p-img.jpg" alt="Speaking practice">
+                </div>
+                <div class="method-content">
+                    <h4>Принцип 80/20</h4>
+                    <p>На наших занятиях 80% времени говорите вы. Преподаватель направляет беседу и мягко корректирует ошибки.</p>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-image">
+                    <img src="images/english-lesson-concept_118813-12731.avif" alt="Context learning">
+                </div>
+                <div class="method-content">
+                    <h4>Контекстное обучение</h4>
+                    <p>Новая лексика подается через реальные ситуации: от деловых переговоров до заказа кофе в путешествии.</p>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-image">
+                    <img src="images/english-teacher-teaching-in-class-illustration-concept-on-white-background-vector.jpg" alt="Context learning">
+                </div>
+                <div class="method-content">
+                    <h4>Эффект погружения:</h4>
+                    <p>Даже на начальных уровнях мы стараемся минимизировать использование родного языка. Это приучает ваш мозг «переключаться» на английский, минуя стадию внутреннего перевода.</p>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-image">
+                    <img src="images/teacher-teaching-classroom-vector-illustration_1253202-26532.avif" alt="Context learning">
+                </div>
+                <div class="method-content">
+                    <h4>Актуальный контент:</h4>
+                    <p>Никаких текстов про «London is the capital». Мы обсуждаем тренды, смотрим фрагменты современных шоу и работаем с материалами, которые интересны именно вам.</p>
+                </div>
+            </div>
+
+            </div>
+    </div>
+</section>
+
+<section class="ispeak-partners-section">
+  <div class="ispeak-container">
+    <div class="ispeak-slider-top">
+      <h2 class="ispeak-heading">С нами уже обучаются:</h2>
+    </div>
+    <div class="ispeak-slider-viewport">
+      <div class="ispeak-slider-track">
+        <div class="ispeak-card-item">
+          <div class="ispeak-card">
+            <div class="ispeak-card-img">
+              <img src="images/halyk-bank.svg" alt="Halyk">
+            </div>
+            <div class="ispeak-card-info">
+              <span class="ispeak-badge">Партнер</span>
+              <h3>Halyk Bank</h3>
+              <p>Обучение сотрудников в рамках корпоративной программы</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ispeak-card-item">
+          <div class="ispeak-card">
+            <div class="ispeak-card-img">
+              <img src="images/air-astana-1.svg" alt="Air Astana">
+            </div>
+            <div class="ispeak-card-info">
+              <span class="ispeak-badge">Партнер</span>
+              <h3>Air Astana</h3>
+              <p>Языковая подготовка персонала авиакомпании</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ispeak-card-item">
+          <div class="ispeak-card">
+            <div class="ispeak-card-img">
+              <img src="images/sam.webp" alt="Samruk">
+            </div>
+            <div class="ispeak-card-info">
+              <span class="ispeak-badge">Партнер</span>
+              <h3>Samruk Academy</h3>
+              <p>Развитие компетенций в бизнес-академии</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ispeak-card-item">
+          <div class="ispeak-card">
+            <div class="ispeak-card-img">
+              <img src="images/big.webp" alt="BI Group">
+            </div>
+            <div class="ispeak-card-info">
+              <span class="ispeak-badge">Партнер</span>
+              <h3>BI Group</h3>
+              <p>Корпоративные курсы английского языка</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ispeak-dots-container"></div>
+  </div>
+</section>
+
+<section>
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="images/free-icon-courses-17772312.png" alt="iSpeak Logo" class="footer-logo">
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> hello@iSpeak.kz</p>
+                <p><i class="fas fa-phone"></i> +7 (900) 123-45-67</p>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h4 class="footer-title">Мы в соцсетях</h4>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/taspaev.a?isgh=MWprbjV5OTRpNmh1eQ%3D%3D&utm_source=qr" class="social-link" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://web.telegram.org/" class="social-link" title="Telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/" class="social-link" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <span>© 2026 iSpeak.</span>
+    </div>
+</footer>
+</section>
+
+<div class="ispeak-auth-modal" id="authModal">
+    <div class="auth-content">
+        <span class="auth-close" id="closeAuth">&times;</span>
+        <div class="auth-form-container">
+            <h2 id="authTitle">Вход</h2>
+            
+            <div id="authStatusMsg" class="auth-status-msg"></div>
+
+            <form id="authForm">
+                <input type="hidden" id="authAction" value="login">
+                
+                <div id="mainInputs">
+                    <input type="email" id="authEmail" placeholder="Email" required>
+                    <input type="password" id="authPass" placeholder="Пароль" required>
+                </div>
+
+                <div id="verificationSection" style="display: none; margin-top: 10px;">
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Код отправлен на вашу почту</p>
+                    <input type="text" id="authCode" placeholder="000000" maxlength="6">
+                </div>
+
+                <button type="submit" class="auth-submit-btn" id="submitBtn">Продолжить</button>
+            </form>
+            <p class="auth-toggle">
+                <span id="toggleText">Нет аккаунта?</span> <a href="#" id="toggleAuth">Зарегистрироваться</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="method-modal" class="mm-overlay">
+    <div class="mm-card block">
+        <button class="mm-close" onclick="closeMethodModal()">&times;</button>
+        
+        <div class="mm-content">
+            <div class="mm-icon">
+                <i class="fas fa-comments"></i> </div>
+            
+            <h2>Живое общение</h2>
+            <div class="mm-divider"></div>
+            
+            <p class="mm-main-text">
+                80% времени на уроке — это разговорная практика. Вы начнете говорить с первого занятия, преодолевая языковой барьер в игровой и дружеской атмосфере.
+            </p>
+            
+            <p class="mm-sub-text">
+                Наша методика фокусируется на реальных жизненных ситуациях. Мы не просто учим правила, мы учим их использовать в Кокшетау, в путешествиях или на собеседованиях.
+            </p>
+
+            <div class="mm-actions">
+                <a href="contact.html" class="mm-btn" onclick="closeMethodModal()">Записаться на урок</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ispeak-widget-wrapper">
+    <button class="ispeak-open-btn" id="ispeak-open-chat">
+        <i class="fa-solid fa-headset"></i>
+        <span>Поддержка</span>
+    </button>
+
+    <div class="ispeak-overlay" id="ispeak-chat-overlay">
+        <div class="ispeak-chat-container">
+            <div class="ispeak-chat-header">
+                <div class="ispeak-chat-avatar">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="ispeak-chat-status-info">
+                    <span class="ispeak-chat-name">iSpeak Support</span>
+                    <span class="ispeak-chat-online">
+                        <i class="fa-solid fa-circle"></i> Онлайн
+                    </span>
+                </div>
+                <button class="ispeak-close-btn" id="ispeak-close-chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="ispeak-chat-messages" id="ispeak-msg-box">
+                <div id="ispeak-typing" class="ispeak-typing-indicator">
+                    <div class="ispeak-dot"></div>
+                    <div class="ispeak-dot"></div>
+                    <div class="ispeak-dot"></div>
+                </div>
+            </div>
+
+            <div class="ispeak-chat-actions" id="ispeak-actions-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.level-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const level = this.getAttribute('data-level');
+        const targetContent = document.getElementById(level);
+        
+        // убирает выделение у всех кнопок и скрывает контент
+        document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('selected'));
+        document.querySelectorAll('.info-content').forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none';
+        });
+
+        // выделяет тек кнопку 
+        this.classList.add('selected');
+
+        // показывает новый блок с анимкой 
+        targetContent.style.display = 'block';
+        setTimeout(() => {
+            targetContent.classList.add('active');
+        }, 50);
+    });
+});
+</script>
+<script src="script.js"></script>
+</body>
+</html>
